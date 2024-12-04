@@ -26,6 +26,7 @@ contract ProfileManager is Ownable {
     }
 
     struct ProductProfile {
+        uint256 productId;         // Unique product ID
         address productOwner;      // Wallet address of the product owner (developer or contract)
         string productName;        // Name of the product
         string productDescription; // Description of the product
@@ -40,7 +41,9 @@ contract ProfileManager is Ownable {
     // Mappings to store profiles
     mapping(address => GranteeProfile) public granteeProfiles;
     mapping(address => DeveloperProfile) public developerProfiles;
-    mapping(address => ProductProfile) public productProfiles;
+    mapping(uint256 => ProductProfile) public productProfiles; // Mapping from productId to ProductProfile
+
+    uint256 public productProfileCount; // Counter for tracking the number of product profiles created
 
     modifier onlyUniqueGranteeProfile() {
         require(granteeProfiles[msg.sender].granteeAddress == address(0), "Grantee profile already exists");
@@ -52,7 +55,7 @@ contract ProfileManager is Ownable {
         _;
     }
 
-    constructor() Ownable(msg.sender) { }
+    constructor(address _owner) Ownable(_owner) { }
 
     // Grantee Profile Functions
 
@@ -112,13 +115,18 @@ contract ProfileManager is Ownable {
 
     // Product Profile Functions
 
-    // Create or update a product profile (can be done by smart contracts as well)
-    function createProductProfile(address _productOwner, string memory _productName, string memory _productDescription) external {
-        ProductProfile storage profile = productProfiles[_productOwner];
+    // Create or update a product profile
+    function createProductProfile(address _productOwner, string memory _productName, string memory _productDescription) external returns (uint256 productId) {
+        productProfileCount++; // Increment product profile count
+        productId = productProfileCount; // Create a new product ID
+        
+        ProductProfile storage profile = productProfiles[productId];
+        profile.productId = productId;
         profile.productOwner = _productOwner;
         profile.productName = _productName;
         profile.productDescription = _productDescription;
         profile.status = "Micro-grant"; // Initially status is "Micro-grant"
+        
         if (profile.createdAt == 0) {  // If profile is being created for the first time
             profile.createdAt = block.timestamp;
         }
@@ -126,30 +134,30 @@ contract ProfileManager is Ownable {
     }
 
     // Update product profile status (for transitioning between stages)
-    function updateProductProfileStatus(string memory _status) external {
-        ProductProfile storage profile = productProfiles[msg.sender];
+    function updateProductProfileStatus(uint256 _productId, string memory _status) external {
+        ProductProfile storage profile = productProfiles[_productId];
         require(profile.productOwner == msg.sender, "Not the profile owner");
         profile.status = _status;
         profile.updatedAt = block.timestamp;
     }
 
     // Add a mini-grant provider
-    function addMiniGrantProvider(address _provider) external {
-        ProductProfile storage profile = productProfiles[msg.sender];
+    function addMiniGrantProvider(uint256 _productId, address _provider) external {
+        ProductProfile storage profile = productProfiles[_productId];
         require(profile.productOwner == msg.sender, "Not the profile owner");
         profile.miniGrantProviders.push(_provider);
     }
 
     // Add an incubator
-    function addIncubator(address _incubator) external {
-        ProductProfile storage profile = productProfiles[msg.sender];
+    function addIncubator(uint256 _productId, address _incubator) external {
+        ProductProfile storage profile = productProfiles[_productId];
         require(profile.productOwner == msg.sender, "Not the profile owner");
         profile.incubators.push(_incubator);
     }
 
     // Add a funder
-    function addFunder(address _funder) external {
-        ProductProfile storage profile = productProfiles[msg.sender];
+    function addFunder(uint256 _productId, address _funder) external {
+        ProductProfile storage profile = productProfiles[_productId];
         require(profile.productOwner == msg.sender, "Not the profile owner");
         profile.funders.push(_funder);
     }
@@ -166,8 +174,35 @@ contract ProfileManager is Ownable {
         return developerProfiles[_developer];
     }
 
-    // Get product profile by address
-    function getProductProfile(address _productOwner) external view returns (ProductProfile memory) {
-        return productProfiles[_productOwner];
+    // Get product profile by productId
+    function getProductProfile(uint256 _productId) external view returns (ProductProfile memory) {
+        return productProfiles[_productId];
+    }
+
+    // Get all product profiles for a product owner
+    function getProductProfilesByOwner(address _productOwner) external view returns (ProductProfile[] memory) {
+        uint256 count = productProfileCount;
+        uint256 profileCount = 0;
+        
+        // Count how many profiles the owner has
+        for (uint256 i = 1; i <= count; i++) {
+            if (productProfiles[i].productOwner == _productOwner) {
+                profileCount++;
+            }
+        }
+
+        // Create an array to hold the profiles for that owner
+        ProductProfile[] memory profiles = new ProductProfile[](profileCount);
+        uint256 index = 0;
+
+        // Store the profiles for the owner
+        for (uint256 i = 1; i <= count; i++) {
+            if (productProfiles[i].productOwner == _productOwner) {
+                profiles[index] = productProfiles[i];
+                index++;
+            }
+        }
+
+        return profiles;
     }
 }
