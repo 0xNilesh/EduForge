@@ -15,6 +15,7 @@ contract GrantManager is Ownable {
         uint256 productProfileId; // Associated product profile ID
         bool open; // Whether the grant is open or closed
         uint256 milestoneFunds; // Funds reserved for milestone-based disbursements
+        string category; // Category of project
     }
 
     // Struct to represent a Proposal for a grant
@@ -85,20 +86,23 @@ contract GrantManager is Ownable {
         address _granteeAddress,
         string memory _name,
         string memory _description,
-        address _assigneeAddress,
-        uint256 _productProfileId
-    ) external onlyOwner {
+        string memory _category
+    ) external {
         grantCounter++; // Increment grant counter for a new ID
+        uint256 productId = profileManager.createProductProfile(msg.sender, _name, _category, _description);
+
         grants[grantCounter] = Grant({
             granteeAddress: _granteeAddress,
             name: _name,
             description: _description,
             amount: 0,
-            assigneeAddress: _assigneeAddress,
-            productProfileId: _productProfileId,
+            assigneeAddress: address(0),
+            productProfileId: productId,
             open: true, // New grants are open by default
-            milestoneFunds: 0 // Initially no milestone funds
+            milestoneFunds: 0,// Initially no milestone funds
+            category: _category
         });
+
         emit GrantCreated(grantCounter, _granteeAddress, true);
     }
 
@@ -143,18 +147,16 @@ contract GrantManager is Ownable {
         // Calculate 30% of the proposed amount for the proposer
         uint256 proposerAmount = (proposal.proposedAmount * 30) / 100;
 
-        // Transfer 30% of the proposed amount to the proposer
-        payable(proposal.proposerAddress).call{value: proposerAmount}("");
-
         // Update the remaining balance for milestone-based disbursement
         uint256 remainingAmount = proposal.proposedAmount - proposerAmount;
 
-        uint256 productId = profileManager.createProductProfile(proposal.proposerAddress, proposal.proposalName, proposal.proposalDescription);
-
+        profileManager.updateProductProfileOwner(grants[grantId].productProfileId, proposal.proposerAddress);
         grants[grantId].milestoneFunds = remainingAmount;
         grants[grantId].amount = proposal.proposedAmount;
         grants[grantId].assigneeAddress = proposal.proposerAddress;
-        grants[grantId].productProfileId = productId;
+
+        // Transfer 30% of the proposed amount to the proposer
+        payable(proposal.proposerAddress).call{value: proposerAmount}("");
 
         emit ProposalAccepted(_proposalId, grantId, msg.sender, proposerAmount);
     }

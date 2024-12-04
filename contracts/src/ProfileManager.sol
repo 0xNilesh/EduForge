@@ -29,7 +29,8 @@ contract ProfileManager is Ownable {
         uint256 productId;         // Unique product ID
         address productOwner;      // Wallet address of the product owner (developer or contract)
         string productName;        // Name of the product
-        string productDescription; // Description of the product
+        string productDescription; // Description of the product,
+        string category;           // Category of the product,
         string status;             // Status of the product (e.g., "Micro-grant", "Incubation", "Fundraising")
         uint256 createdAt;         // Timestamp of profile creation
         uint256 updatedAt;         // Timestamp of last profile update
@@ -116,7 +117,7 @@ contract ProfileManager is Ownable {
     // Product Profile Functions
 
     // Create or update a product profile
-    function createProductProfile(address _productOwner, string memory _productName, string memory _productDescription) external returns (uint256 productId) {
+    function createProductProfile(address _productOwner, string memory _productName, string memory category, string memory _productDescription) external returns (uint256 productId) {
         productProfileCount++; // Increment product profile count
         productId = productProfileCount; // Create a new product ID
         
@@ -131,6 +132,7 @@ contract ProfileManager is Ownable {
             profile.createdAt = block.timestamp;
         }
         profile.updatedAt = block.timestamp;
+        profile.category = category;
     }
 
     // Update product profile status (for transitioning between stages)
@@ -139,6 +141,12 @@ contract ProfileManager is Ownable {
         require(profile.productOwner == msg.sender, "Not the profile owner");
         profile.status = _status;
         profile.updatedAt = block.timestamp;
+    }
+
+    function updateProductProfileOwner(uint256 _productId, address newOwner) external {
+        ProductProfile storage profile = productProfiles[_productId];
+        require(profile.productOwner == msg.sender, "Not the profile owner");
+        profile.productOwner = newOwner;
     }
 
     // Add a mini-grant provider
