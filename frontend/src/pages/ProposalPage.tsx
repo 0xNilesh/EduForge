@@ -116,10 +116,12 @@ const ProposalPage = () => {
     },
   });
 
+  console.log(grant);
+
   return (
     <div className="min-h-screen bg-gradient-to-r from-purple-900 via-gray-900 to-black text-white p-10">
       {/* Grant Details */}
-      {grant && (
+      {grant && grant?.author &&  (
         <div className="max-w-4xl mx-auto border border-purple-800 rounded-lg px-6 py-6 bg-opacity-20 bg-purple-800">
           <h1 className="text-3xl font-bold mb-4">{grant.title}</h1>
           <p>
