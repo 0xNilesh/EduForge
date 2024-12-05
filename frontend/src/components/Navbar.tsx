@@ -30,7 +30,7 @@ const Navbar = () => {
           {isDropdownOpen && (
             <ul className="absolute z-10 left-0 bg-purple-800 text-white rounded-lg shadow-lg w-40">
               <li className="px-4 py-2 hover:bg-purple-700 hover:rounded-lg cursor-pointer">
-                <Link to="/grants/explor">Explore Grants</Link>
+                <Link to="/grants/explore">Explore Grants</Link>
               </li>
               <li className="px-4 py-2 hover:bg-purple-700 hover:rounded-lg cursor-pointer">
                 <Link to="/grants/create">Create Grant</Link>
