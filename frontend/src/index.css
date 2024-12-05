@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* #1B1D22 */
+/* #313438 */
+
+* Apply the dark background color to the entire page */
+body {
+  background-color: #1B1D22; /* Dark background color */
+  color: #e2e8f0; /* Light text color for contrast */
+}
+
+/* Optional: Add styles to the root element */
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', sans-serif; /* Or any other font you'd prefer */
+}
