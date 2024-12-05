@@ -5,10 +5,10 @@ export default {
     extend: {
       colors: {
         lightest: "#FEFFFF", // Plain White
-        lighter: "#DEF2F1", // Azureish White
-        mid: "#3AAFA9", // Keppel
-        dark: "#2B7A78", // Myrtle Green
-        darkest: "#17252A", // Dark Greenish Black
+        lighter: "#9B74FF", // Azureish White
+        mid: "#6A1E9C", // Keppel
+        dark: "#6A1E9C", // Myrtle Green
+        darkest: "#2C0E5F", // Dark Greenish Black
         secondaryDark: '#141216',
       },
       backgroundImage: {

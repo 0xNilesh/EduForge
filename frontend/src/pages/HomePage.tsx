@@ -13,39 +13,36 @@ const HomePage = () => {
   };
 
   return (
-    <div className="bg-dark text-lightest">
+    <div className="bg-gradient-to-b from-dark via-darkest to-dark text-lightest min-h-screen">
       {/* Hero Section */}
-      <section
-        className="relative flex items-center justify-center min-h-screen bg-cover bg-center"
-        // style={{ backgroundImage: 'url(/images/hero-background.jpg)' }}
-      >
-        <div className="absolute inset-0 bg-darkest opacity-60"></div>
+      <section className="relative flex items-center justify-center min-h-screen bg-cover bg-center">
+        <div className="absolute inset-0 bg-gradient-to-r from-darkest via-purple-900 to-dark opacity-80"></div>
         <motion.div
           className="text-center z-10 px-6 py-12"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
         >
-          <h1 className="text-5xl md:text-6xl font-extrabold leading-tight mb-4 text-lighter drop-shadow-lg">
-            Eduverse
+          <h1 className="text-6xl md:text-7xl font-extrabold leading-tight mb-4 text-lighter drop-shadow-xl">
+            EduForge
           </h1>
-          <p className="text-lg md:text-2xl mb-8 text-lightest">
-            Empowering Education with DeFi Financing
+          <p className="text-xl md:text-2xl mb-6 text-lightest">
+            Forging Ideas into Reality
           </p>
-          <p className="text-base md:text-xl mb-8 text-lightest">
-            Unlock a world of knowledge, showcase your talents, and access zero-collateral financing with Eduverse.
+          <p className="text-base md:text-lg mb-10 text-lightest">
+            Transforming educational ideas into projects with seamless grant financing, incubation support, and funding.
           </p>
           <button
             onClick={scrollToCards}
-            className="inline-block px-8 py-4 bg-dark rounded-lg text-lg text-lightest hover:bg-lightest hover:text-darkest transition-all duration-300 transform hover:scale-105"
+            className="inline-block px-10 py-4 bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg text-lg text-lightest hover:scale-105 hover:shadow-lg transition-all duration-300"
           >
-            Get Started
+            Explore Opportunities
           </button>
         </motion.div>
       </section>
 
-      {/* About Eduverse */}
-      <section className="py-24 bg-lightest text-dark">
+      {/* About EduForge */}
+      <section className="py-24 bg-darkest text-lightest">
         <div className="container mx-auto text-center">
           <motion.h2
             className="text-4xl font-bold mb-8"
@@ -53,31 +50,31 @@ const HomePage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            About Eduverse
+            What is EduForge?
           </motion.h2>
           <motion.p
-            className="mb-12 text-lg"
+            className="mb-12 text-lg leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2 }}
           >
-            <strong>Eduverse</strong> is a revolutionary platform that connects education, freelancing, and decentralized finance (DeFi). 
-            Whether you are a student looking to learn, an educator ready to teach, or a freelancer seeking opportunities, we’ve got you covered.
+            <strong>EduForge</strong> is a platform where educational ideas are forged and transformed into fully realized products.
+            From idea generation to incubation and fundraising, we support developers and innovators every step of the way.
           </motion.p>
           <motion.p
-            className="text-lg mb-12"
+            className="text-lg mb-12 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.4 }}
           >
-            With DeFi-powered bonds, educators can finance their courses, freelancers can secure project funding, and students can 
-            pay for education through future earnings. <strong>No collateral</strong> needed, just your skills and ambitions.
+            We provide a marketplace for grants, a comprehensive incubation dashboard to track project progress, and support for fundraising. 
+            At <strong>EduForge</strong>, we showcase the full lifecycle of your project — from concept to real-world impact.
           </motion.p>
         </div>
       </section>
 
-      {/* Super-App Concept and Cards */}
-      <section id="super-app-section" className="py-24 bg-light text-darkest">
+      {/* Super-App Cards */}
+      <section id="super-app-section" className="py-24 bg-gradient-to-b from-dark via-darkest to-dark text-lightest">
         <div className="container mx-auto text-center">
           <motion.h2
             className="text-4xl font-bold mb-8"
@@ -85,7 +82,7 @@ const HomePage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1 }}
           >
-            A Super-App for Decentralized Education
+            Your Educational Journey, Empowered
           </motion.h2>
           <motion.p
             className="mb-12 text-lg"
@@ -93,82 +90,73 @@ const HomePage = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2 }}
           >
-            <strong>Eduverse</strong> isn’t just an app — it’s a super-powered ecosystem that connects all aspects of education, freelancing, 
-            and decentralized finance (DeFi). Imagine a world where educators, students, and freelancers all work in harmony, with each 
-            part of the platform supporting the other through <strong>DeFi-enabled financing</strong>.
+            From micro-grants to incubation, EduForge is your partner in building and scaling impactful educational projects.
           </motion.p>
-          
-          <div className="flex justify-center gap-12">
-            {/* Card 1 */}
+          <div className="flex justify-center gap-8">
             <motion.div
-              className="w-full md:w-1/3 p-10 bg-gradient-mid rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
+              className="w-full md:w-1/3 p-8 bg-gradient-to-r from-purple-900 to-purple-600 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <h3 className="text-xl font-semibold mb-4">Zero-Collateral DeFi Financing</h3>
+              <h3 className="text-xl font-semibold mb-4">Grant Marketplace</h3>
               <p>
-                Access DeFi financing with no collateral. Use your skills and future earnings to unlock loans or financing for courses and projects.
+                Submit your ideas or browse grants from organizations looking to support innovative projects. Receive micro-grants to start building.
               </p>
               <Link
-                to="/bonds"
-                className="block mt-6 text-lg font-semibold text-darkest hover:text-lightest hover:underline flex items-center justify-between"
+                to="/grants/explore"
+                className="block mt-6 text-lg font-semibold text-lightest hover:text-light hover:underline flex items-center justify-between"
               >
-                Explore <span>&#8594;</span>
+                Explore Grants <span>&#8594;</span>
               </Link>
             </motion.div>
 
-            {/* Card 2 */}
             <motion.div
-              className="w-full md:w-1/3 p-10 bg-gradient-mid rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
+              className="w-full md:w-1/3 p-8 bg-gradient-to-r from-blue-900 to-blue-600 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <h3 className="text-xl font-semibold mb-4">Freelancer Marketplace</h3>
+              <h3 className="text-xl font-semibold mb-4">Incubation Dashboard</h3>
               <p>
-                Build your portfolio and find work through Eduverse. Students and businesses can find the perfect talent, and freelancers can earn by showcasing their skills.
+                Track milestones, metrics, and progress through our advanced incubation tools. Collaborate with mentors and stakeholders in real-time.
               </p>
               <Link
-                to="/freelance"
-                className="block mt-6 text-lg font-semibold text-darkest hover:text-lightest hover:underline flex items-center justify-between"
+                to="/incubation"
+                className="block mt-6 text-lg font-semibold text-lightest hover:text-light hover:underline flex items-center justify-between"
               >
-                Find Work <span>&#8594;</span>
+                Learn More <span>&#8594;</span>
               </Link>
             </motion.div>
 
-            {/* Card 3 */}
             <motion.div
-              className="w-full md:w-1/3 p-10 bg-gradient-mid rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
+              className="w-full md:w-1/3 p-8 bg-gradient-to-r from-green-900 to-green-600 rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <h3 className="text-xl font-semibold mb-4">Learn & Teach with DeFi Support</h3>
+              <h3 className="text-xl font-semibold mb-4">Fundraising Support</h3>
               <p>
-                Teachers and learners can access a new way to finance courses. Unlock learning opportunities and create courses with DeFi-powered bonds.
+                Scale your project with the help of EduForge’s fundraising platform, connecting you with investors and showcasing your progress.
               </p>
               <Link
-                to="/courses"
-                className="block mt-6 text-lg font-semibold text-darkest hover:text-lightest hover:underline flex items-center justify-between"
+                to="/fundraising"
+                className="block mt-6 text-lg font-semibold text-lightest hover:text-light hover:underline flex items-center justify-between"
               >
-                Start Learning <span>&#8594;</span>
+                Start Scaling <span>&#8594;</span>
               </Link>
             </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="bg-darkest" data-aos="fade-up" id="jointhecommunity">
-      <div className="relative max-w-[1440px] ml-auto mr-auto">
-        <div
-        className="absolute w-full h-full bg-gradient-to-t from-dark via-dark via-5% to-transparent pointer-events-none"
-      />
-      <div className="absolute left-1/2 transform -translate-x-1/2 uppercase text-white font-bold text-2xl sm:text-4xl md:text-5xl lg:text-[54px] bottom-[15%] text-center">
-        Join the Community
-      </div>
-      <div className="px-5 py-3 md:px-3 flex gap-2 md:gap-3 bg-dark bg-gradient-to-t from-dark to-dark ">
-        <img
+      {/* Community Section */}
+      <section className="bg-gradient-to-b from-darkest via-dark to-dark text-lightest py-16">
+        <div className="container mx-auto">
+          <div className="relative max-w-6xl mx-auto text-center">
+            <h2 className="text-4xl font-bold mb-8">Join the EduForge Community</h2>
+            <div className="flex justify-center gap-4">
+            <img
           className="w-[48%] rounded-2xl"
           alt="background image 1"
           src={'./community/Image-1.jpg'}
@@ -190,45 +178,46 @@ const HomePage = () => {
             src={'./community/Image-4.jpg'}
           /> 
         </div>
-      </div>
-      </div>
-    </section>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Join the Community */}
-      <section className="bg-dark">
-    <div className="max-w-[1440px] ml-auto mr-auto lg:px-20 md:px-10 px-5 pb-16 md:pb-32 flex flex-col items-start gap-24 z-10" data-aos="fade-up">
-      <div className="max-w-[400px] md:w-full md:max-w-none mr-auto ml-auto flex flex-wrap gap-6 justify-center">
-        <SocialCard
-            socialIconUrl={'./social/twitterIcon.webp'}
-            linkUrl="/"
-            text="Twitter"
-            hoverColor="#03A9F4"
-        />
-        <SocialCard
-            socialIconUrl={'./social/telegramIcon.webp'}
-            linkUrl="/"
-            text="Telegram"
-            hoverColor="#28A8EA"
-        />
-        <SocialCard
-            socialIconUrl={'./social/discordIcon.webp'}
-            linkUrl="/"
-            text="Discord"
-            hoverColor="#5765EC"
-        />
-        <SocialCard
-            socialIconUrl={'./social/githubIcon.webp'}
-            linkUrl="/"
-            text="GitHub"
-            hoverColor="#000000"
-        />
-      </div>
-    </div>
-    </section>
+      {/* Social Cards */}
+      <section className="bg-dark py-16">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-8">Connect with Us</h2>
+          <div className="flex justify-center gap-8">
+            <SocialCard
+              socialIconUrl="./social/twitterIcon.webp"
+              linkUrl="/"
+              text="Twitter"
+              hoverColor="#03A9F4"
+            />
+            <SocialCard
+              socialIconUrl="./social/telegramIcon.webp"
+              linkUrl="/"
+              text="Telegram"
+              hoverColor="#28A8EA"
+            />
+            <SocialCard
+              socialIconUrl="./social/discordIcon.webp"
+              linkUrl="/"
+              text="Discord"
+              hoverColor="#5765EC"
+            />
+            <SocialCard
+              socialIconUrl="./social/githubIcon.webp"
+              linkUrl="/"
+              text="GitHub"
+              hoverColor="#000000"
+            />
+          </div>
+        </div>
+      </section>
 
-    {/* Footer */}
-    <Footer />
-
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };

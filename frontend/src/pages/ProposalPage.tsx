@@ -129,7 +129,8 @@ const ProposalPage = () => {
             <strong>Status:</strong> {grant.status}
           </p>
           <p>
-          <strong>Problem:</strong> {grant.problem}
+          <strong>Description:</strong> 
+          {grant.description}
           </p>
           <p>
             <strong>Funds:</strong> {grant.milestoneFunds} EDU
@@ -146,6 +147,10 @@ const ProposalPage = () => {
           </p>
           <p>
             <strong>Requested Amount:</strong> {proposal.amount} EDU
+          </p>
+          <p>
+          <strong>Description:</strong> 
+          {proposal.description}
           </p>
           <p>
             <strong>Status:</strong> {proposal.accepted ? "Accepted" : "Pending"}

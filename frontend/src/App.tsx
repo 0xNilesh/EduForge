@@ -25,7 +25,7 @@ const App = () => {
           />
           {/* Other pages with Sidebar and Navbar */}
           <Route
-            path="/micro-grants"
+            path="/grants/explore"
             element={<DashboardPage />}
           />
           <Route
